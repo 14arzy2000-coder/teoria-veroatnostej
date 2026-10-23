@@ -102,3 +102,62 @@ if abs(result[0] - x2[0]) < 0.000001 and abs(result[1] - x2[1]) < 0.000001:
     print("Результаты совпадают")
 else:
     print("Результаты не совпадают")
+
+
+тз3
+def dense_layer(x, W, b):
+    result = []
+
+    if len(W) != len(b):
+        raise ValueError("Количество смещений не совпадает с количеством нейронов")
+
+    for i in range(len(W)):
+        if len(W[i]) != len(x):
+            raise ValueError("Размеры входных данных и весов не совпадают")
+
+        s = 0
+
+        for j in range(len(x)):
+            s = s + x[j] * W[i][j]
+
+        s = s + b[i]
+        result.append(s)
+
+    return result
+
+
+try:
+    M = int(input("Введите количество входных значений M: "))
+    N = int(input("Введите количество нейронов N: "))
+
+    if M <= 0 or N <= 0:
+        raise ValueError("Размерности должны быть больше нуля")
+
+    x = []
+
+    print("Введите входные значения:")
+    for i in range(M):
+        x.append(float(input()))
+
+    W = []
+
+    print("Введите веса матрицы W:")
+    for i in range(N):
+        row = []
+        for j in range(M):
+            row.append(float(input()))
+        W.append(row)
+
+    b = []
+
+    print("Введите смещения:")
+    for i in range(N):
+        b.append(float(input()))
+
+    result = dense_layer(x, W, b)
+
+    print("Результат работы слоя:")
+    print(result)
+
+except ValueError as error:
+    print("Ошибка:", error)
